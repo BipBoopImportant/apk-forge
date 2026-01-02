@@ -54,19 +54,19 @@ const Index = () => {
 
       <main className="container mx-auto px-4 py-8 space-y-8">
         {/* Hero Section */}
-        <section className="text-center space-y-4 py-8">
-          <h2 className="text-3xl md:text-4xl font-bold">
+        <header className="text-center space-y-4 py-8">
+          <h1 className="text-3xl md:text-4xl font-bold">
             Make Any Android App{' '}
             <span className="text-terminal-green text-glow">Debuggable</span>
-          </h2>
+          </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Upload your APK or APKS file and get a debuggable version in seconds.
             All processing happens locally in your browser — your files never leave your device.
           </p>
-        </section>
+        </header>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <section aria-label="APK Processing Tool" className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column - Upload & Terminal */}
           <div className="space-y-6">
             <UploadZone onFileSelect={handleFileSelect} isProcessing={isProcessing} />
@@ -74,7 +74,7 @@ const Index = () => {
           </div>
 
           {/* Right Column - Results */}
-          <div className="space-y-6">
+          <aside className="space-y-6">
             {result ? (
               <>
                 <ApkInfoCard info={result.info} />
@@ -87,12 +87,12 @@ const Index = () => {
                 </button>
               </>
             ) : (
-              <div className="terminal-border rounded-xl p-8 text-center space-y-4">
+              <article className="terminal-border rounded-xl p-8 text-center space-y-4">
                 <div className="w-16 h-16 mx-auto rounded-2xl bg-secondary/50 flex items-center justify-center">
-                  <span className="text-3xl opacity-50">📦</span>
+                  <span className="text-3xl opacity-50" role="img" aria-label="Package">📦</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">No APK Selected</h3>
+                  <h2 className="font-semibold text-lg mb-2">No APK Selected</h2>
                   <p className="text-sm text-muted-foreground">
                     Drop an APK or APKS file to get started
                   </p>
@@ -102,49 +102,44 @@ const Index = () => {
                     Supported formats: <span className="text-terminal-cyan">.apk</span> <span className="text-terminal-green">.apks</span>
                   </p>
                 </div>
-              </div>
+              </article>
             )}
-          </div>
-        </div>
+          </aside>
+        </section>
 
         {/* Features Section */}
-        <section className="pt-8">
-          <h3 className="text-xl font-semibold mb-6 text-center">
+        <section aria-label="Features" className="pt-8">
+          <h2 className="text-xl font-semibold mb-6 text-center">
             <span className="text-terminal-cyan">Features</span>
-          </h3>
+          </h2>
           <Features />
         </section>
 
         {/* How it Works */}
-        <section className="py-8">
-          <h3 className="text-xl font-semibold mb-6 text-center">
+        <section aria-label="How it Works" className="py-8">
+          <h2 className="text-xl font-semibold mb-6 text-center">
             <span className="text-terminal-green">How it Works</span>
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          </h2>
+          <ol className="grid grid-cols-1 md:grid-cols-4 gap-4 list-none p-0">
             {[
               { step: '01', title: 'Upload', desc: 'Drop your APK or APKS file' },
               { step: '02', title: 'Extract', desc: 'Unpack and analyze contents' },
               { step: '03', title: 'Patch', desc: 'Enable debugging in manifest' },
               { step: '04', title: 'Download', desc: 'Get your debuggable APK' },
-            ].map((item, index) => (
-              <div key={item.step} className="text-center space-y-2">
+            ].map((item) => (
+              <li key={item.step} className="text-center space-y-2">
                 <div className="w-12 h-12 mx-auto rounded-xl bg-terminal-green/10 flex items-center justify-center font-mono text-terminal-green font-bold">
                   {item.step}
                 </div>
-                <h4 className="font-semibold">{item.title}</h4>
+                <h3 className="font-semibold">{item.title}</h3>
                 <p className="text-xs text-muted-foreground">{item.desc}</p>
-                {index < 3 && (
-                  <div className="hidden md:block absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 text-muted-foreground">
-                    →
-                  </div>
-                )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
 
         {/* Disclaimer */}
-        <section className="terminal-border rounded-lg p-4 text-center">
+        <section aria-label="Disclaimer" className="terminal-border rounded-lg p-4 text-center">
           <p className="text-xs text-muted-foreground">
             <strong className="text-foreground">⚠️ Disclaimer:</strong> This tool is intended for developers to debug their own applications.
             Only use on apps you have permission to modify. The modified APK uses a debug signature and requires{' '}
